@@ -192,15 +192,11 @@ const schedMgr = {
         let rBlock = params.blocks.res[0];
         let resSlots = blocks.sci.timeslots[rBlock.charAt(0)];
         let lastSlot = resSlots[4];
-        let newSlot = [-1, -1];
-        if (this.morningHums) {
-            newSlot[0] = lastSlot[0] + 1;
-            newSlot[1] = lastSlot[1];
-        } else {
-            newSlot[0] = lastSlot[0];
-            newSlot[1] = lastSlot[1] + 1;
-        }
+        let newSlot = [lastSlot[0] + 1, lastSlot[1]];
+        console.log('All slots: ' + resSlots);
+        console.log('+ additional research slot: ' + newSlot);
         resSlots.push(newSlot);
+        console.log('All slots: ' + resSlots);
 
         // Determine rooms
         let resLevel = level == 'eleven' ? 'res2' : 'res3';

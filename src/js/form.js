@@ -125,6 +125,16 @@ const routers = [
 
     // Page 3
     () => {
+        // Build filename: sched-block-date
+        let filename = 'sched-', date = new Date();
+        filename += response.level == 'eleven' ? '11' : '12';
+        filename += 'ABCDEFGH'.charAt(response.blocks.hums) + '-';
+        filename += date.getFullYear();
+        if (date.getDate() < 10) { filename += '0'; }
+        filename += date.getDate();
+        if (date.getMonth() + 1 < 10) { filename += '0'; }
+        filename += (date.getMonth() + 1);
+
         // Save as image
         $("#dl-jpg").click(() => {
             html2canvas(document.getElementById('sched'), {
@@ -163,7 +173,7 @@ const routers = [
                         let dataBlob = new Blob([dataArr.buffer], {
                             "type": "image/png"
                         });
-                        saveAs(dataBlob, "sched.png");
+                        saveAs(dataBlob, filename + ".png");
                     }
                 }
             });
@@ -172,15 +182,6 @@ const routers = [
         // Save as Excel
         $('#dl-xls').click(() => {
             console.log('clicked xls');
-            // Build filename: sched-block-date
-            let filename = 'sched-', date = new Date();
-            filename += response.level == 'eleven' ? '11' : '12';
-            filename += 'ABCDEFGH'.charAt(response.blocks.hums) + '-';
-            filename += date.getFullYear();
-            if (date.getDate() < 10) { filename += '0'; }
-            filename += date.getDate();
-            if (date.getMonth() + 1 < 10) { filename += '0'; }
-            filename += (date.getMonth() + 1);
 
             // Save as .xlsx
             let exportData = schedGen.export.getExportData();
