@@ -9,8 +9,9 @@
     <meta name="application-name" content="SYP SchedMaker '18-'19">
 
     <!-- Styles -->
-    <link rel="preload" href="styles/style.css" as="style">
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="preload" href="dist/style.css" as="style">
+    <link rel="preload" href="dist/script.js" as="script">
+    <link rel="stylesheet" type="text/css" href="dist/style.css">
     <style type="text/css">@-webkit-keyframes sk-scaleout{0%{-webkit-transform:scale(0)}100%{-webkit-transform:scale(1);opacity:0}}@keyframes sk-scaleout{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1);opacity:0}}body{background:#2b4162}#loader>p{color:#fff;line-height:1.4rem}.spinner{width:40px;height:40px;margin:0 auto 2rem;background-color:#fff;border-radius:100%;-webkit-animation:sk-scaleout 1s infinite ease-in-out;animation:sk-scaleout 1s infinite ease-in-out}</style>
 </head>
 <body>
@@ -32,11 +33,7 @@
     <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
     <!-- Page scripts -->
-    <script defer src="scripts/app.js" id="mainJs"></script>
-    <script async defer src="scripts/constants.js"></script>
-    <script defer src="scripts/form.js"></script>
-    <script defer src="scripts/schedmgr.js"></script>
-    <script defer src="scripts/schedgen.js"></script>
+    <script defer src="dist/script.js" id="mainJs"></script>
     <script type="text/javascript">
         // WebFontLoader config
         WebFontConfig = {

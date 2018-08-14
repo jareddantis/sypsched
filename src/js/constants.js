@@ -97,13 +97,13 @@ const blocks = {
             // Core-able subjects
             chem31: [4,10],
             chem32: [5,10],
-            phy31: [6,1],
-            phy32: [7,1],
+            phys31: [6,1],
+            phys32: [7,1],
             bio3: [8,11],
             chem41: [9,9],
             chem42: [10,9],
-            phy41: [11,2],
-            phy42: [12,2],
+            phys41: [11,2],
+            phys42: [12,2],
             bio4: [13,3],
 
             // Non-core-able subjects
