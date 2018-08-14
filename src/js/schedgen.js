@@ -133,16 +133,5 @@ const schedGen = {
         }
 
         $('#sched').append(body);
-
-        // Create TableExport instance
-        let tableForExport = $(body).clone();
-        $(tableForExport).html($(body).html().replace(/\(/g, '\r\n('));
-        $(tableForExport).attr('id', 'schedExport');
-        schedGen.export = new TableExport(tableForExport, {
-            bootstrap: false,
-            exportButtons: false,
-            formats: ['xlsx'],
-            trimWhitespace: true
-        });
     }
 };

@@ -183,11 +183,14 @@ const routers = [
         $('#dl-xls').click(() => {
             console.log('clicked xls');
 
-            // Save as .xlsx
-            let exportData = schedGen.export.getExportData();
-            let data = exportData.schedExport.xlsx;
-            console.log(exportData);
-            schedGen.export.export2file(data.data, data.mimeType, filename, data.fileExtension);
+            // Save as .xls
+            // from blubits.github.io/syp_schedmaker
+            let table_div = document.getElementById('sched');
+            let table_html = table_div.outerHTML.replace(/ /g, '%20');
+            let a = document.createElement('a');
+            a.href = 'data:application/vnd.ms-excel,' + table_html;
+            a.download = filename + '.xls';
+            a.click();
         });
     }
 ];
