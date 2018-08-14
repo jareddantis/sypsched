@@ -3,10 +3,10 @@
 
 /**
     Gulpfile.js:
-      Recipe for building the GWA app with Gulp.
+      Recipe for building the schedmaker app with Gulp.
 
-    Part of the illustra/gwa project by @aureljared.
-    Licensed under GPLv2.
+    Part of the sypsched project by @aureljared.
+    Licensed under GPLv3.
 */
 
 var del = require('del');
@@ -38,7 +38,6 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     var concat = require('gulp-concat');
     var babel = require('gulp-babel');
-    var nodebug = require('gulp-strip-debug');
     del(['dist/script.js']);
 
     return gulp.src([
@@ -49,7 +48,14 @@ gulp.task('js', function() {
             presets: ['env']
         }))
         .pipe(uglify())
-        .pipe(nodebug())
+        .pipe(gulp.dest('./dist/'));
+});
+
+// Strip debug logging (must be run after task 'js')
+gulp.task('nodebug', function() {
+    var strip = require('gulp-strip-debug');
+    return gulp.src('./dist/script.js')
+        .pipe(strip())
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -65,6 +71,7 @@ gulp.task('svg', function() {
 
 // Minify index HTML file
 gulp.task('html', function() {
+    var rev = require('gulp-append-query-string');
     var htmlmin = require('gulp-htmlmin');
     del(['index.html']);
 
@@ -74,9 +81,12 @@ gulp.task('html', function() {
             minifyJS: true,
             removeComments: true
         }))
+        .pipe(rev())
         .pipe(gulp.dest('./'));
 });
 
 // Gulp task to minify all files
-gulp.task('default', gulp.parallel('css', 'js'));
-gulp.task('all', gulp.parallel('default', 'html', 'svg'));
+gulp.task('default', gulp.parallel('css', 'js', 'html'));
+gulp.task('all', gulp.parallel('default', 'svg'));
+gulp.task('release', gulp.series('default', 'nodebug'));
+gulp.task('release-all', gulp.series('all', 'nodebug'));
