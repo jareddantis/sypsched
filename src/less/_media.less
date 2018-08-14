@@ -1,0 +1,21 @@
+@media screen and (max-width: 600px) {
+    body {
+        display: block;
+    }
+    #container {
+        max-width: ~"calc(100% - 3rem)";
+        margin: 3rem 1.5rem 2rem;
+
+        &.page-2 > #content select {
+            width: 100% !important;
+            max-width: 20rem;
+        }
+
+        &.page-3 > #content button {
+            margin: 0 .5rem 1rem;
+        }
+    }
+    #content {
+        width: 100%;
+    }
+}

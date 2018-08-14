@@ -214,6 +214,19 @@ const schedMgr = {
             this.slots[row][col] = [resName, room];
         }
 
+        // Clear other research slots
+        let resShift = this.morningHums ? 'pmRes' : 'amRes';
+        let allResSlots = blocks.sci.timeslots[resShift].slice();
+        console.log('All slots: ' + allResSlots);
+        allResSlots.splice(newSlot[1] - 1, 1);
+        console.log('All remaining slots: ' + allResSlots);
+        for (let i = 0; i < allResSlots.length; i++) {
+            let row = allResSlots[i][0],
+                col = allResSlots[i][1];
+            console.log('Clearing extra slot at ' + row + ',' + col);
+            this.slots[row][col] = false;
+        }
+
         // Save sched object
         schedGen.sched = this.slots;
         console.log(this.slots);
