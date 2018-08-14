@@ -2,11 +2,13 @@
 
 let app = {
     start: function () {
-        $('#loader').fadeOut(500);
-        console.log("Started");
         window.setTimeout(() => {
-            this.showPage(0);
-        }, 500);
+            $('#loader').fadeOut(300);
+            console.log("Started");
+            window.setTimeout(() => {
+                this.showPage(0);
+            }, 300);
+        }, 700);
     },
     showPage: function (page) {
         let show = () => {
