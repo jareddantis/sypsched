@@ -98,13 +98,34 @@ const schedMgr = {
         }
         console.log(this.slots);
 
-        // Remove core block from available slots
-        let sBlock = this.morningHums ? ['X','Y','Z'] : ['A','B','C'];
-        sBlock.splice(sBlock.indexOf(coreBlock), 1);
-
         // Populate electives dropdown with core-able subjects
         let iMax = params.level == 'eleven' ? 9 : 14;
         for (let i = 4; i < iMax; i++) {
+            let sBlock;
+
+            switch (i) {
+                // Chem: Only C and X are 4.1, the rest are 4.2
+                case 9:
+                    sBlock = this.morningHums ? ['X'] : ['C'];
+                    break;
+                case 10:
+                    sBlock = this.morningHums ? ['Y','Z'] : ['A','B'];
+                    break;
+
+                // Phys: Only B and Z are 4.2, the rest are 4.1
+                case 11:
+                    sBlock = this.morningHums ? ['X','Y'] : ['A','C'];
+                    break;
+                case 12:
+                    sBlock = this.morningHums ? ['Z'] : ['B'];
+                    break;
+
+                // Everything else
+                default:
+                    sBlock = this.morningHums ? ['X','Y','Z'] : ['A','B','C'];
+            }
+            sBlock.splice(sBlock.indexOf(coreBlock), 1);
+
             for (let j = 0; j < sBlock.length; j++) {
                 let value = subjects[i].replace(/ |\./g, "").toLowerCase();
                 let opt = $('<option value="' + value + '">');
@@ -114,6 +135,8 @@ const schedMgr = {
         }
 
         // Add Tech elective
+        let sBlock = this.morningHums ? ['X','Y','Z'] : ['A','B','C'];
+        sBlock.splice(sBlock.indexOf(coreBlock), 1);
         for (let j = 0; j < sBlock.length; j++) {
             let text = subjects[14] + sBlock[j];
             $(selector).append($('<option value="tech">').text(text));
